@@ -306,13 +306,12 @@ int main() {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < 30)) {
 						// Flag to say we are too close
-						closeness = 1 - ((check_car_s - car_s) / 30);
 						too_close = true;
 					}
 				}
 				
 				// Check the other lanes to swith to
-				if (too_close == true) {
+				if (too_close) {
 					if (lane == 2) {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
@@ -344,11 +343,7 @@ int main() {
 			}
 			
 			if (too_close) {
-				if (closeness < 0.7) {
-					ref_vel -= 0.220 * closeness * 0.9;
-				} else {
-					ref_vel -= 0.330;
-				}
+				ref_vel -=0.220;
 				if (!car_to_left && !current_lane_change) {
 					lane --;
 				} else if (!car_to_right && !current_lane_change) {
