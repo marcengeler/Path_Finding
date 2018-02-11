@@ -279,7 +279,7 @@ int main() {
 			double ref_dist = car_speed * 2.0 / 2.24;
 			
 			// change ref_dist to 30 for tests
-			ref_dist = 30.0
+			ref_dist = 30.0;
 			double closeness = 1.0;
 			
 			// check if cars are to the left or right
@@ -350,10 +350,10 @@ int main() {
 			
 			if (too_close) {
 				ref_vel -= 0.220 * closeness;
-				if (!car_to_right) {
-					lane ++;
-				} else if (!car_to_left) {
+				if (!car_to_left) {
 					lane --;
+				} else if (!car_to_right) {
+					lane ++;
 				}
 			}
 			else if (ref_vel < 49.5) {
