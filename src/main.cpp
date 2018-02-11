@@ -277,39 +277,7 @@ int main() {
 			
 			double new_car_ref_vel = ref_vel;
 			
-			if(prev_size > 0) {
-				car_s = end_path_s;
-			}
-			
-			// find ref_v to use
-			for (int i = 0; i < sensor_fusion.size(); i++) {
-				// car is in my lane
-				d = sensor_fusion[i][6];
-				
-				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
-					vx = sensor_fusion[i][3];
-					vy = sensor_fusion[i][4];
-					check_speed = sqrt(vx * vx + vy * vy);
-					check_car_s = sensor_fusion[i][5];
-					
-					check_car_s += (double)prev_size * 0.02 * check_speed;
-					
-					// Check if i am close to car within 30m gap
-					if (( check_car_s >  car_s) && ((check_car_s - car_s) < 30)) {
-						// Flag to change the lane because car is slower than us
-						if (check_speed < ref_vel /  2.24) {
-							change_lane = true;
-							if (check_speed < new_car_ref_vel / 2.24) {
-								new_car_ref_vel = check_speed * 2.24;
-							}
-						}
-						
-						new_car_ref_vel = 32.0;
-					}
-				}
-			}
-			// set the reference velocity slightly lower, to get to a 30m distance
-			ref_vel = new_car_ref_vel * 0.9;
+
 			
 			// if the previous size is empty, use the car's actual position
 			// as reference state
