@@ -297,6 +297,9 @@ int main() {
 						// Flag to say we are too close
 						closeness = 1 - ((check_car_s - end_path_s) / ref_dist);
 						too_close = true;
+						if (lane > 0) {
+							lane = 0;
+						}
 					}
 				}
 			}
