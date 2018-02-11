@@ -275,7 +275,8 @@ int main() {
 			double check_speed = 0.0;
 			double check_car_s = 0.0;
 			
-			double new_car_ref_vel = ref_vel;
+			// use 2 second rule as a metric of distance
+			double ref_dist = car_speed * 2.0;
 
 			// find ref_v to use
 			for (int i = 0; i < sensor_fusion.size(); i++) {
@@ -291,7 +292,7 @@ int main() {
 					check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < 30)) {
+					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < ref_dist)) {
 						// Flag to say we are too close
 						too_close = true;
 					}
