@@ -21,4 +21,12 @@ Using a predefined value of 0.224 m/s^2 for the acceleration will keep both valu
 
 In order to not collide with other vehicles, we have to get the data from the sensor fusion vector. This gives us information on all other vehicles on the road. Using Frenet coordinates, we can easily identify which lanes vehicles are on, and if there is a vehicle ahead of us on our lane.
 
-In order to slow down, the vehicle closeness is defined as distance / reference_distance, whereaas reference_distance defines the distance we want to keep in order to stay save. as soon as this value gets too small, we can actually decelerate at a higher pace, to keep our velocity in a save region.
+In order to slow down, the vehicle closeness is defined as distance / reference_distance, whereaas reference_distance defines the distance we want to keep in order to stay save. as soon as this value gets too small, we can actually decelerate at a higher pace, to keep our velocity in a save region. We can also define a distance relative to our velocity, which often increases the safety at higher speeds.
+
+### Lane change state machine
+
+In order to change lanes, we need to be aware of vehiles to the left or right of us. To do this, we check any vehicles which are close to us in lanes left and right from us (expect the outer lanes, which reduce to either left or right of us) and follow the same restrictions as the collision detection. 
+
+Of course, in order to change lanes, we also need a clearance to the back, so the constaint is a bit tighter, before we can deceide to change lanes. As soon as we have a vehicle in front of us, and the adjacient lanes are clear, we can issue a lane changing command.
+
+Because we do a spline interpolation between our current position and our desired future point, the lane transision will be smooth.
