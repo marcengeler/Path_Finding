@@ -7,5 +7,7 @@ To start off the problem, I followed the project description video to test the d
 
 ## Model Generation
 
-###
+### Jerk // Acceleration restrictions
+
+In order to have a smooth driving 
 
