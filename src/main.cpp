@@ -325,7 +325,7 @@ int main() {
 					if (lane == 1) {
 						if ( d > 0 && d < 4 ) {
 							// check if there is a car within +/- reference distance
-							car_to:left |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < 40));
+							car_to_left |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < 40));
 						} else if ( d > 8 && d < 12 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < 40));
