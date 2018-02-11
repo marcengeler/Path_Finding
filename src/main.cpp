@@ -268,7 +268,7 @@ int main() {
 			double ref_y_prev = 0.0;
 						
 			bool too_close = false;
-			bool change_lane = false;
+			int change_lane = 0;
 			float d = 0.0;
 			double vx = 0.0;
 			double vy = 0.0;
@@ -279,35 +279,71 @@ int main() {
 			double ref_dist = car_speed * 2.0 / 2.24;
 			double closeness = 1.0;
 			
-			ref_dist = 30.0;
+			// check if cars are to the left or right
+			bool car_to_left = false;
+			bool car_to_right = false;
 
 			// find ref_v to use
 			for (int i = 0; i < sensor_fusion.size(); i++) {
 				// car is in my lane
 				d = sensor_fusion[i][6];
 				
+				vx = sensor_fusion[i][3];
+				vy = sensor_fusion[i][4];
+				check_speed = sqrt(vx * vx + vy * vy);
+				check_car_s = sensor_fusion[i][5];
+					
+				check_car_s += (double)prev_size * 0.02 * check_speed;
+					
+				// check if car is on the same lane as we are
 				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
-					vx = sensor_fusion[i][3];
-					vy = sensor_fusion[i][4];
-					check_speed = sqrt(vx * vx + vy * vy);
-					check_car_s = sensor_fusion[i][5];
-					
-					check_car_s += (double)prev_size * 0.02 * check_speed;
-					
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < ref_dist)) {
 						// Flag to say we are too close
 						closeness = 1 - ((check_car_s - end_path_s) / ref_dist);
 						too_close = true;
-						if (lane > 0) {
-							lane = 0;
+					}
+				}
+				
+				// Check the other lanes to swith to
+				if (too_close == true) {
+					if (lane == 2) {
+						if ( d > 4 && d < 8 ) {
+							// check if there is a car within +/- reference distance
+							car_to_left |= (( check_car_s >  end_path_s - ref_dist) && ((check_car_s - end_path_s) < ref_dist));
 						}
+						// set car_to_right to true, to not change outside of highway
+						car_to_right = true;
+					}
+					
+					if (lane == 1) {
+						if ( d > 0 && d < 4 ) {
+							// check if there is a car within +/- reference distance
+							car_to_right |= (( check_car_s >  end_path_s - ref_dist) && ((check_car_s - end_path_s) < ref_dist));
+						} else if ( d > 8 && d < 12 ) {
+							// check if there is a car within +/- reference distance
+							car_to_left |= (( check_car_s >  end_path_s - ref_dist) && ((check_car_s - end_path_s) < ref_dist));
+						}
+					}
+					
+					if (lane == 0) {
+						if ( d > 4 && d < 8 ) {
+							// check if there is a car within +/- reference distance
+							car_to_right |= (( check_car_s >  end_path_s - ref_dist) && ((check_car_s - end_path_s) < ref_dist));
+						}
+						// set car_to_left to true, to not change outside of highway
+						car_to_left = true;
 					}
 				}
 			}
 			
 			if (too_close) {
 				ref_vel -= 0.220 * closeness;
+				if (!car_to_right) {
+					lane ++;
+				} else if (!car_to_left) {
+					lane --;
+				}
 			}
 			else if (ref_vel < 49.5) {
 				ref_vel += 0.220;
