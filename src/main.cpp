@@ -259,7 +259,7 @@ int main() {
 				next_d = 6.0;
 				
 				// generate XY vector
-				xy = getXY(next_s, next_d, maps_waypoints_s, map_waypoints_x, map_waypoints_y);
+				xy = getXY(next_s, next_d, map_waypoints_s, map_waypoints_x, map_waypoints_y);
 				
 				
 				// just increment the position to get constant 50mph speed
