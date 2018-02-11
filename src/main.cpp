@@ -283,7 +283,7 @@ int main() {
 			bool car_to_left = false;
 			bool car_to_right = false;
 			
-			bool current_lane_change = (car_d > 3 && car_d < 5) || (car_d > 7 && car_d < 9);
+			bool current_lane_change = !((lane * 4 + 2.5 > car_d) && ()lane * 4 + 1.5 < car_d));
 			
 			// Preventing collitions.
             if (prev_size > 0) {
@@ -305,9 +305,9 @@ int main() {
 				// check if car is on the same lane as we are
 				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < ref_dist)) {
+					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
 						// Flag to say we are too close
-						closeness = 1 - ((check_car_s - end_path_s) / ref_dist);
+						closeness = 1 - ((check_car_s - car_s) / ref_dist);
 						too_close = true;
 					}
 				}
@@ -317,7 +317,7 @@ int main() {
 					if (lane == 2) {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left |= (( check_car_s >  end_path_s - 50) && ((check_car_s - end_path_s) < ref_dist));
+							car_to_left |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < ref_dist));
 						}
 						// set car_to_right to true, to not change outside of highway
 						car_to_right = true;
@@ -326,17 +326,17 @@ int main() {
 					if (lane == 1) {
 						if ( d > 0 && d < 4 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left |= (( check_car_s >  end_path_s - 50) && ((check_car_s - end_path_s) < ref_dist + 10));
+							car_to_left |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < ref_dist + 10));
 						} else if ( d > 8 && d < 12 ) {
 							// check if there is a car within +/- reference distance
-							car_to_right |= (( check_car_s >  end_path_s - 50) && ((check_car_s - end_path_s) < ref_dist + 10));
+							car_to_right |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < ref_dist + 10));
 						}
 					}
 					
 					if (lane == 0) {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
-							car_to_right |= (( check_car_s >  end_path_s - 50) && ((check_car_s - end_path_s) < ref_dist + 10));
+							car_to_right |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < ref_dist + 10));
 						}
 						// set car_to_left to true, to not change outside of highway
 						car_to_left = true;
