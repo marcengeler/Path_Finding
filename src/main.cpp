@@ -283,7 +283,7 @@ int main() {
 			bool car_to_left = false;
 			bool car_to_right = false;
 			
-			bool current_lane_change = (car_d > 3 && car_d < 5) || (car_d > 7 && car_d < 9);
+			bool current_lane_change = (car_d > 2.5 && car_d < 5.5) || (car_d > 6.5 && car_d < 9.5);
 			
 			// Preventing collitions.
             if (prev_size > 0) {
