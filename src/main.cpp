@@ -345,7 +345,11 @@ int main() {
 			}
 			
 			if (too_close) {
-				ref_vel -= 0.220 * closeness * 0.9;
+				if (closeness < 0.7) {
+					ref_vel -= 0.220 * closeness * 0.9;
+				} else {
+					ref_vel -= 0.330;
+				}
 				if (!car_to_left && !current_lane_change) {
 					lane --;
 				} else if (!car_to_right && !current_lane_change) {
