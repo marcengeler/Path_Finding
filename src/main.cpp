@@ -283,7 +283,7 @@ int main() {
 			bool car_to_left = false;
 			bool car_to_right = false;
 			
-			bool current_lane_change = (car_d > 2.5 && car_d < 5.5) || (car_d > 6.5 && car_d < 9.5);
+			bool current_lane_change = (car_d > 3 && car_d < 5) || (car_d > 7 && car_d < 9);
 			
 			// Preventing collitions.
             if (prev_size > 0) {
@@ -345,7 +345,7 @@ int main() {
 			}
 			
 			if (too_close) {
-				ref_vel -= 0.220 * closeness;
+				ref_vel -= 0.220 * closeness * 0.9;
 				if (!car_to_left && !current_lane_change) {
 					lane --;
 				} else if (!car_to_right && !current_lane_change) {
