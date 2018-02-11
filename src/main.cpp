@@ -282,6 +282,11 @@ int main() {
 			// check if cars are to the left or right
 			bool car_to_left = false;
 			bool car_to_right = false;
+			
+			// Preventing collitions.
+            if (prev_size > 0) {
+              car_s = end_path_s;
+            }
 
 			// find ref_v to use
 			for (int i = 0; i < sensor_fusion.size(); i++) {
@@ -383,9 +388,9 @@ int main() {
 			
 			// Use the map to generate evenly distributed waypoints (distance 30m)
 			// Use 4m as lane width, with 2m starting mid of lane 0
-			vector<double> next_wp0 = getXY(car_s + 30, (2 + 4 * lane), map_waypoints_s, map_waypoints_x, map_waypoints_y);
-			vector<double> next_wp1 = getXY(car_s + 60, (2 + 4 * lane), map_waypoints_s, map_waypoints_x, map_waypoints_y);
-			vector<double> next_wp2 = getXY(car_s + 90, (2 + 4 * lane), map_waypoints_s, map_waypoints_x, map_waypoints_y);
+			vector<double> next_wp0 = getXY(car_s + 30.0, (2 + 4 * lane), map_waypoints_s, map_waypoints_x, map_waypoints_y);
+			vector<double> next_wp1 = getXY(car_s + 60.0, (2 + 4 * lane), map_waypoints_s, map_waypoints_x, map_waypoints_y);
+			vector<double> next_wp2 = getXY(car_s + 90.0, (2 + 4 * lane), map_waypoints_s, map_waypoints_x, map_waypoints_y);
 			
 			ptsx.push_back(next_wp0[0]);
 			ptsy.push_back(next_wp0[1]);
@@ -445,8 +450,11 @@ int main() {
 				y_ref = y_point;
 				
 				// Rotate back to normal after rotating it in vehicle coordinates earlier
-				x_point = ref_x + (x_ref * cos(ref_yaw) - y_ref * sin(ref_yaw));
-				y_point = ref_y + (x_ref * sin(ref_yaw) + y_ref * cos(ref_yaw));
+				x_point = (x_ref * cos(ref_yaw) - y_ref * sin(ref_yaw));
+				y_point = (x_ref * sin(ref_yaw) + y_ref * cos(ref_yaw));
+				
+				x_point += ref_x;
+				y_point += ref_y;
 				
 				next_x_vals.push_back(x_point);
 				next_y_vals.push_back(y_point);
