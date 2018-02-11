@@ -318,7 +318,7 @@ int main() {
 					if (lane == 2) {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left |= check_car
+							car_to_left |= check_car;
 						}
 						// set car_to_right to true, to not change outside of highway
 						car_to_right = true;
