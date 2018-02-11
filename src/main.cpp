@@ -330,7 +330,7 @@ int main() {
 							car_to_right |= (( check_car_s >  end_path_s - 2 * ref_dist) && ((check_car_s - end_path_s) < ref_dist));
 						} else if ( d > 8 && d < 12 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left |= (( check_car_s >  end_path_s - 2 * ref_dist) && ((check_car_s - end_path_s) < ref_dist))
+							car_to_left |= (( check_car_s >  end_path_s - 2 * ref_dist) && ((check_car_s - end_path_s) < ref_dist));
 						}
 					}
 					
