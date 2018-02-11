@@ -248,7 +248,7 @@ int main() {
 			// declare used variables
 			double dist_inc = 0.5;
 			double next_s = 0.0;
-			double next_d = 0.0:
+			double next_d = 0.0;
 			vector<double> xy;
 			
 			for (int i = 0; i < 50; i++) {
