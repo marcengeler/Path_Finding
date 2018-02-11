@@ -361,11 +361,11 @@ int main() {
 			}
 			// Change back to middle lane whenever possible
 			if (lane != 1 && !current_lane_change) {
-				if (lane > 1 && !car_to_right) {
+				if (lane > 1 && !car_to_left) {
 					lane = 1;
 				}
 				
-				if (lane < 1 && !car_to_left) {
+				if (lane < 1 && !car_to_right) {
 					lane = 1;
 				}
 			}
