@@ -276,7 +276,7 @@ int main() {
 			double check_car_s = 0.0;
 			
 			// Use 2 Second Rule to calculate the reference distance required
-			double ref_dist = 30;
+			double ref_dist = car_speed * 2.0 / 2.24;
 			double closeness = 1.0;
 			
 			// check if cars are to the left or right
