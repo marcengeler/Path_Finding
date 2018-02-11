@@ -275,8 +275,7 @@ int main() {
 			double check_speed = 0.0;
 			double check_car_s = 0.0;
 			
-			// Use 2 Second Rule to calculate the reference distance required
-			double ref_dist = car_speed * 2.0 / 2.24;
+			// Determine closeness to other cars
 			double closeness = 1.0;
 			
 			// check if cars are to the left or right
@@ -305,9 +304,9 @@ int main() {
 				// check if car is on the same lane as we are
 				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
+					if (( check_car_s >  car_s) && ((check_car_s - car_s) < 30)) {
 						// Flag to say we are too close
-						closeness = 1 - ((check_car_s - car_s) / ref_dist);
+						closeness = 1 - ((check_car_s - car_s) / 30);
 						too_close = true;
 					}
 				}
@@ -326,7 +325,7 @@ int main() {
 					if (lane == 1) {
 						if ( d > 0 && d < 4 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < 40));
+							car_to:left |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < 40));
 						} else if ( d > 8 && d < 12 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right |= (( check_car_s >  car_s - 50) && ((check_car_s - car_s) < 40));
