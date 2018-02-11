@@ -293,7 +293,7 @@ int main() {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < 30)) {
 						// Flag to say we are too close
-						too_close = true
+						too_close = true;
 					}
 				}
 			}
