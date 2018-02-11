@@ -279,7 +279,7 @@ int main() {
 			double ref_dist = car_speed * 2.0 / 2.24;
 			double closeness = 1.0;
 			
-			ref_dist = 30.0
+			ref_dist = 30.0;
 
 			// find ref_v to use
 			for (int i = 0; i < sensor_fusion.size(); i++) {
