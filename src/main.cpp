@@ -286,7 +286,7 @@ int main() {
 				// car is in my lane
 				d = sensor_fusion[i][6];
 				
-				if (d < (4 + 4 * lane) && d > (4 * lane)) {
+				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
 					vx = sensor_fusion[i][3];
 					vy = sensor_fusion[i][4];
 					check_speed = sqrt(vx * vx + vy * vy);
@@ -295,7 +295,7 @@ int main() {
 					check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  car_s) && ((check_car_s - car_s) < 30)) {
+					if (( check_car_s >  car_s ) && ((check_car_s - car_s) < 30)) {
 						// Flag to change the lane because car is slower than us
 						if (check_speed < ref_vel /  2.24) {
 							change_lane = true;
