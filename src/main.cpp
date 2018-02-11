@@ -277,6 +277,10 @@ int main() {
 			
 			double new_car_ref_vel = ref_vel;
 			
+			if(prev_size > 0) {
+				car_s = end_path_s;
+			}
+			
 			// find ref_v to use
 			for (int i = 0; i < sensor_fusion.size(); i++) {
 				// car is in my lane
@@ -291,7 +295,7 @@ int main() {
 					check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  end_path_s ) && ((check_car_s - end_path_s) < 30)) {
+					if (( check_car_s >  car_s) && ((check_car_s - car_s) < 30)) {
 						// Flag to change the lane because car is slower than us
 						if (check_speed < ref_vel /  2.24) {
 							change_lane = true;
@@ -299,6 +303,8 @@ int main() {
 								new_car_ref_vel = check_speed * 2.24;
 							}
 						}
+						
+						new_car_ref_vel = 32.0;
 					}
 				}
 			}
