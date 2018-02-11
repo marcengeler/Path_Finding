@@ -314,7 +314,7 @@ int main() {
 				
 				// Check the other lanes to swith to
 				if (too_close == true) {
-					bool check_car = (( check_car_s - car_s > - 10) && ((check_car_s - car_s) < 35));
+					bool check_car = (( check_car_s - car_s > - 20) && ((check_car_s - car_s) < 35));
 					if (lane == 2) {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
@@ -357,7 +357,7 @@ int main() {
 					lane ++;
 				}
 			}
-			else if (ref_vel < 49.5) {
+			else if (ref_vel < 100.5) {
 				ref_vel += 0.220;
 			}
 
