@@ -294,13 +294,15 @@ int main() {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < ref_dist)) {
 						// Flag to say we are too close
+						double closeness = 1 -(check_car_s - end_path_s) / ref_dist;
+						ref_vel -= 448 * closeness;
 						too_close = true;
 					}
 				}
 			}
 			
 			if (too_close) {
-				ref_vel -= .448;
+				
 			}
 			else if (ref_vel < 49.95) {
 				ref_vel += .448;
