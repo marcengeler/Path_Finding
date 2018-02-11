@@ -245,10 +245,26 @@ int main() {
 
           	// TODO: define a path made up of (x,y) points that the car will visit sequentially every .02 seconds
 			
+			// declare used variables
 			double dist_inc = 0.5;
+			double next_s = 0.0;
+			double next_d = 0.0:
+			vector<double> xy;
+			
 			for (int i = 0; i < 50; i++) {
-				next_x_vals.push_back(car_x + (dist_inc * i) * cos(deg2rad(car_yaw)));
-				next_y_vals.push_back(car_y + (dist_inc * i) * cos(deg2rad(car_yaw)));
+				// incorporate the next waypoint into the calculation
+				next_s = car_s + (i + 1) * dist_inc;
+				
+				// set to constant middle lane
+				next_d = 6.0;
+				
+				// generate XY vector
+				xy = getXY(next_s, next_d, maps_waypoints_s, map_waypoints_x, map_waypoints_y);
+				
+				
+				// just increment the position to get constant 50mph speed
+				next_x_vals.push_back(xy[0]);
+				next_y_vals.push_back(xy[1]);
 			}
 			// END
           	msgJson["next_x"] = next_x_vals;
