@@ -275,6 +275,8 @@ int main() {
 			double check_speed = 0.0;
 			double check_car_s = 0.0;
 			
+			double closeness = 1.0;
+			
 			// use 2 second rule as a metric of distance
 			double ref_dist = car_speed * 2.0;
 
@@ -294,17 +296,16 @@ int main() {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < ref_dist)) {
 						// Flag to say we are too close
-						double closeness = 1 -(check_car_s - end_path_s) / ref_dist;
-						ref_vel -= 448 * closeness;
+						closeness = 1 -(check_car_s - end_path_s) / ref_dist;
 						too_close = true;
 					}
 				}
 			}
 			
 			if (too_close) {
-				
+				ref_vel -= 448 * closeness;
 			}
-			else if (ref_vel < 49.95) {
+			else if (ref_vel < 49.5) {
 				ref_vel += .448;
 			}
 			
