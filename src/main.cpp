@@ -357,7 +357,7 @@ int main() {
 					lane ++;
 				}
 			}
-			else if (ref_vel < 100.5) {
+			else if (ref_vel < 49.5) {
 				ref_vel += 0.220;
 			}
 
