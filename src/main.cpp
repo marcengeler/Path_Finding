@@ -303,6 +303,8 @@ int main() {
 								new_car_ref_vel = check_speed * 2.24;
 							}
 						}
+						
+						new_car_ref_vel = 32.0;
 					}
 				}
 			}
