@@ -292,7 +292,7 @@ int main() {
 					check_speed = sqrt(vx * vx + vy * vy);
 					check_car_s = sensor_fusion[i][5];
 					
-					check_car_s += (double)prev_size * 0.02 * check-speed;
+					check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < 30)) {
@@ -308,6 +308,7 @@ int main() {
 			}
 			// set the reference velocity slightly lower, to get to a 30m distance
 			ref_vel = new_car_ref_vel * 0.9;
+			
 			// if the previous size is empty, use the car's actual position
 			// as reference state
 			if (prev_size < 2) {
