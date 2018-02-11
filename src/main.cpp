@@ -359,6 +359,16 @@ int main() {
 			else if (ref_vel < 49.5) {
 				ref_vel += 0.220;
 			}
+			// Change back to middle lane whenever possible
+			if (lane != 1) {
+				if (lane > 1 && !car_to_right && !current_lane_change) {
+					lane = 1;
+				}
+				
+				if (lane < 1 && !car_to_left && !current_lane_change) {
+					lane = 1;
+				}
+			}
 			
 			// if the previous size is empty, use the car's actual position
 			// as reference state
