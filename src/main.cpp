@@ -293,19 +293,12 @@ int main() {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < 30)) {
 						// Flag to change the lane because car is slower than us
-						if (check_speed < ref_vel /  2.24) {
-							change_lane = true;
-							if (check_speed < new_car_ref_vel / 2.24) {
-								new_car_ref_vel = check_speed * 2.24;
-							}
-						}
-						
-						new_car_ref_vel = 32.0;
+						ref_vel = 39.0;
 					}
 				}
 			}
 			// set the reference velocity slightly lower, to get to a 30m distance
-			ref_vel = new_car_ref_vel * 0.9;
+			// ref_vel = new_car_ref_vel * 0.9;
 			
 			// if the previous size is empty, use the car's actual position
 			// as reference state
