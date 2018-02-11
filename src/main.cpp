@@ -300,10 +300,10 @@ int main() {
 			}
 			
 			if (too_close) {
-				ref_vel -= .224;
+				ref_vel -= .448;
 			}
 			else if (ref_vel < 49.95) {
-				ref_vel += .224;
+				ref_vel += .448;
 			}
 			
 			// if the previous size is empty, use the car's actual position
