@@ -275,6 +275,8 @@ int main() {
 			double check_speed = 0.0;
 			double check_car_s = 0.0;
 			
+			// Use 2 Second Rule to calculate the reference distance required
+			double ref_dist = car_speed * 2.0 / 2.24;
 			double closeness = 1.0;
 
 			// find ref_v to use
@@ -291,19 +293,19 @@ int main() {
 					check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < 30)) {
+					if (( check_car_s >  end_path_s) && ((check_car_s - end_path_s) < ref_dist)) {
 						// Flag to say we are too close
-						closeness = 1 - ((check_car_s - end_path_s) / 30);
+						closeness = 1 - ((check_car_s - end_path_s) / ref_dist);
 						too_close = true;
 					}
 				}
 			}
 			
 			if (too_close) {
-				ref_vel -= 220 * closeness;
+				ref_vel -= 0.220 * closeness;
 			}
 			else if (ref_vel < 49.5) {
-				ref_vel += .220;
+				ref_vel += 0.220;
 			}
 			
 			// if the previous size is empty, use the car's actual position
