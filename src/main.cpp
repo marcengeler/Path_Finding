@@ -164,6 +164,14 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 
 }
 
+int convertDToLaneNumber (double d) {
+	return int(d/4.0) + 1;
+}
+
+double convertLaneNumberToD (int lane) {
+	return 2.0 + 4.0 * lane;
+}
+
 int main() {
   uWS::Hub h;
 
@@ -303,7 +311,7 @@ int main() {
 				check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 				// check if car is on the same lane as we are
-				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
+				if (convertDToLaneNumber(d) == lane) {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
 						// Flag to say we are too close
@@ -314,9 +322,16 @@ int main() {
 				
 				// Check the other lanes to swith to
 				if (too_close == true) {
-					bool check_car = (( check_car_s > car_s - ref_dist) && ((check_car_s - car_s) < ref_dist + 30));
+					// This generates a bool which checks if cars in other lanes are within a certain range. To compute this range, 
+					// A space of +/- reference distance is permitted. Also, the front clearance needs to be 30 m larger, in order to
+					// only change to langes, which really are free of any traffic.
+					// Also, in order to account for the actual car speed, an additional safeguard distance is introduced. It is
+					// deltaV * 1 second (whereas 1 second denotes the 50 timepoints * 0.02seconds which are predicted into the future)
+					// deltaV is the difference in speed of the two vehicles.
+					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
+					bool check_car = (( check_car_s > car_s - deltaS - ref_dist) && ((check_car_s - car_s) < ref_dist + 30));
 					if (lane == 2) {
-						if ( d > 4 && d < 8 ) {
+						if ( convertDToLaneNumber(d) == 1 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
 						}
@@ -325,17 +340,17 @@ int main() {
 					}
 					
 					if (lane == 1) {
-						if ( d > 0 && d < 4 ) {
+						if ( convertDToLaneNumber(d) == 0 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
-						} else if ( d > 8 && d < 12 ) {
+						} else if ( convertDToLaneNumber(d) == 2 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
 						}
 					}
 					
 					if (lane == 0) {
-						if ( d > 4 && d < 8 ) {
+						if ( convertDToLaneNumber(d) == 1 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
 						}
