@@ -314,10 +314,7 @@ int main() {
 				// check if car is on the same lane as we are
 				if (vlane == lane) {
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {	
-						cout << vlane << endl;
-						cout << lane << endl;
-						cout << "#######" << endl;
+					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
 						// Flag to say we are too close
 						closeness = 1 - ((check_car_s - car_s) / ref_dist);
 						too_close = true;
@@ -333,7 +330,7 @@ int main() {
 					// deltaV * 1 second (whereas 1 second denotes the 50 timepoints * 0.02seconds which are predicted into the future)
 					// deltaV is the difference in speed of the two vehicles.
 					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
-					bool check_car = (( check_car_s > car_s - deltaS - ref_dist) && ((check_car_s - car_s) < ref_dist + 30));
+					bool check_car = (( check_car_s > car_s - deltaS - ref_dist) && ((check_car_s - car_s) < (1-closeness) * ref_dist + 15));
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
