@@ -277,7 +277,7 @@ int main() {
 			bool too_close = false;
 			int change_lane = 0;
 			float d = 0.0;
-			int v_lane = 0;
+			int vlane = 0;
 			double vx = 0.0;
 			double vy = 0.0;
 			double check_speed = 0.0;
@@ -302,7 +302,7 @@ int main() {
 			for (int i = 0; i < sensor_fusion.size(); i++) {
 				// car is in my lane
 				d = sensor_fusion[i][6];
-				v_lane = convertDToLaneNumber(d);
+				vlane = convertDToLaneNumber(d);
 				
 				vx = sensor_fusion[i][3];
 				vy = sensor_fusion[i][4];
@@ -315,7 +315,7 @@ int main() {
 				if (vlane == lane) {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {	
-						cout << v_lane << endl;
+						cout << vlane << endl;
 						cout << lane << endl;
 						cout << "#######" << endl;
 						// Flag to say we are too close
