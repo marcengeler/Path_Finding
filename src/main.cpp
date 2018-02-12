@@ -165,9 +165,9 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 }
 
 int convertDToLaneNumber (double d) {
-	if (d < 4.0 and d >= 0) {return 1;}
-    if (d >= 4.0 and d < 8.0) {return 2;}
-    if (d >= 8.0 and d < 12) {return 3;}
+	if (d < 4.0 and d >= 0) {return 0;}
+    if (d >= 4.0 and d < 8.0) {return 1;}
+    if (d >= 8.0 and d < 12) {return 2;}
     return -1;
 }
 
@@ -312,7 +312,7 @@ int main() {
 				check_car_s += (double)prev_size * 0.02 * check_speed;
 				
 				// check if car is on the same lane as we are
-				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
+				if (vlane == lane) {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {	
 						cout << v_lane << endl;
@@ -335,7 +335,7 @@ int main() {
 					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
 					bool check_car = (( check_car_s > car_s - deltaS - ref_dist) && ((check_car_s - car_s) < ref_dist + 30));
 					if (lane == 2) {
-						if ( convertDToLaneNumber(d) == 1 ) {
+						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
 						}
@@ -344,17 +344,17 @@ int main() {
 					}
 					
 					if (lane == 1) {
-						if ( convertDToLaneNumber(d) == 0 ) {
+						if ( vlane == 0 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
-						} else if ( convertDToLaneNumber(d) == 2 ) {
+						} else if ( vlane == 2 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
 						}
 					}
 					
 					if (lane == 0) {
-						if ( convertDToLaneNumber(d) == 1 ) {
+						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
 						}
