@@ -352,10 +352,10 @@ int main() {
 					ref_vel -= 0.360;
 				}
 				if (!car_to_left && !current_lane_change) {
-					cout << "No car left";
+					cout << "No car left" << endl;
 					lane --;
 				} else if (!car_to_right && !current_lane_change) {
-					cout << "No car right";
+					cout << "No car right" << endl;
 					lane ++;
 				}
 			}
