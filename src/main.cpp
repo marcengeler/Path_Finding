@@ -287,8 +287,8 @@ int main() {
 			double ref_dist = 30.0;
 			
 			// check if cars are to the left or right
-			bool car_to_left = false;
-			bool car_to_right = false;
+			bool car_right = false;
+			bool car_left = false;
 			
 			bool current_lane_change = !((lane * 4 + 2.5 > car_d) && (lane * 4 + 1.5 < car_d));
 			
@@ -328,40 +328,40 @@ int main() {
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
-							car_to_right = car_to_right || check_car;
+							car_left = car_left || check_car;
 						}
-						// set car_to_right to true, to not change outside of highway
-						car_to_left = true;
+						// set car_left to true, to not change outside of highway
+						car_right = true;
 					}
 					
 					if (lane == 1) {
 						if ( vlane == 0 ) {
 							// check if there is a car within +/- reference distance
-							car_to_right = car_to_right || check_car;
+							car_left = car_left || check_car;
 						} else if ( vlane == 2 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left = car_to_left || check_car;
+							car_right = car_right || check_car;
 						}
 					}
 					
 					if (lane == 0) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left = car_to_left || check_car;
+							car_right = car_right || check_car;
 						}
-						// set car_to_left to true, to not change outside of highway
-						car_to_right = true;
+						// set car_right to true, to not change outside of highway
+						car_left = true;
 					}
 				}
 			}
 			
 			if (too_close) {
 				ref_vel -= 0.220;
-				if (!car_to_left && !current_lane_change) {
-					cout << "No car left" << endl;
-					lane ++;
-				} else if (!car_to_right && !current_lane_change) {
+				if (!car_right && !current_lane_change) {
 					cout << "No car right" << endl;
+					lane ++;
+				} else if (!car_left && !current_lane_change) {
+					cout << "No car left" << endl;
 					lane --;
 				}
 			}
