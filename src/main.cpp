@@ -334,10 +334,8 @@ int main() {
 							// check if there is a car within +/- reference distance
 							if (check_car) {
 								cout << "To the left" << endl;
-								cout << "Car S" << endl;
-								cout << car_s << endl;
-								cout << "Check Car S" << endl;
-								cout << check_car_s << endl;
+								cout << "Check Car S - Car S" << endl;
+								cout << check_car_s - car_s << endl;
 							}
 							car_to_left = car_to_left || check_car;
 						}
@@ -351,20 +349,16 @@ int main() {
 							car_to_left = car_to_left || check_car;
 							if (check_car) {
 								cout << "To the left" << endl;
-								cout << "Car S" << endl;
-								cout << car_s << endl;
-								cout << "Check Car S" << endl;
-								cout << check_car_s << endl;
+								cout << "Check Car S - Car S" << endl;
+								cout << check_car_s - car_s << endl;
 							}
 						} else if ( vlane == 2 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
 							if (check_car) {
 								cout << "To the right" << endl;
-								cout << "Car S" << endl;
-								cout << car_s << endl;
-								cout << "Check Car S" << endl;
-								cout << check_car_s << endl;
+								cout << "Check Car S - Car S" << endl;
+								cout << check_car_s - car_s << endl;
 							}
 						}
 					}
@@ -375,10 +369,8 @@ int main() {
 							car_to_right = car_to_right || check_car;
 							if (check_car) {
 								cout << "To the right" << endl;
-								cout << "Car S" << endl;
-								cout << car_s << endl;
-								cout << "Check Car S" << endl;
-								cout << check_car_s << endl;
+								cout << "Check Car S - Car S" << endl;
+								cout << check_car_s - car_s << endl;
 							}
 						}
 						// set car_to_left to true, to not change outside of highway
