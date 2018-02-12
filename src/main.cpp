@@ -284,8 +284,7 @@ int main() {
 			double check_car_s = 0.0;
 			
 			// Use 2 Second Rule to calculate the reference distance required
-			double ref_dist = car_speed * 2.0 / 2.24;
-			double closeness = 1.0;
+			double ref_dist = 30.0;
 			
 			// check if cars are to the left or right
 			bool car_to_left = false;
@@ -316,7 +315,6 @@ int main() {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
 						// Flag to say we are too close
-						closeness = 1 - ((check_car_s - car_s) / ref_dist);
 						too_close = true;
 					}
 				}
@@ -330,7 +328,7 @@ int main() {
 					// deltaV * 1 second (whereas 1 second denotes the 50 timepoints * 0.02seconds which are predicted into the future)
 					// deltaV is the difference in speed of the two vehicles.
 					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
-					bool check_car = (( check_car_s > car_s - deltaS - ref_dist) && ((check_car_s - car_s) < (1-closeness) * ref_dist + 15));
+					bool check_car = (( check_car_s > car_s - deltaS - 30) && ((check_car_s - car_s) < 50));
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
@@ -362,11 +360,7 @@ int main() {
 			}
 			
 			if (too_close) {
-				if (closeness < 0.7) {
-					ref_vel -= 0.360 * closeness * 0.9;
-				} else {
-					ref_vel -= 0.360;
-				}
+				ref_vel -= 0.360;
 				if (!car_to_left && !current_lane_change) {
 					cout << "No car left" << endl;
 					lane --;
