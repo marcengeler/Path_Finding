@@ -360,7 +360,7 @@ int main() {
 			}
 			
 			if (too_close) {
-				ref_vel -= 0.360;
+				ref_vel -= 0.110;
 				if (!car_to_left && !current_lane_change) {
 					cout << "No car left" << endl;
 					lane --;
