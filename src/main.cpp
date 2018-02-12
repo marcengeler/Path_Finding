@@ -328,7 +328,6 @@ int main() {
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
-							if (check_car) {
 							car_to_right = car_to_right || check_car;
 						}
 						// set car_to_right to true, to not change outside of highway
