@@ -172,9 +172,9 @@ int convertDToLaneNumber (double d) {
 }
 
 double convertLaneNumberToD (int lane) {
-	if (laneNumber == 1) {return 2.0;}
-    if (laneNumber == 2) {return 6.0;}
-    if (laneNumber == 3) {return 10.0;}
+	if (lane == 1) {return 2.0;}
+    if (lane == 2) {return 6.0;}
+    if (lane == 3) {return 10.0;}
     return 14.0;
 }
 
