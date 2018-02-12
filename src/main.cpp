@@ -347,18 +347,20 @@ int main() {
 			
 			if (too_close) {
 				if (closeness < 0.7) {
-					ref_vel -= 0.220 * closeness * 0.9;
+					ref_vel -= 0.360 * closeness * 0.9;
 				} else {
-					ref_vel -= 0.220;
+					ref_vel -= 0.360;
 				}
 				if (!car_to_left && !current_lane_change) {
+					cout << "No car left";
 					lane --;
 				} else if (!car_to_right && !current_lane_change) {
+					cout << "No car right";
 					lane ++;
 				}
 			}
 			else if (ref_vel < 49.5) {
-				ref_vel += 0.220;
+				ref_vel += 0.360;
 			}
 
 			
