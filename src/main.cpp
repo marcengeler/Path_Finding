@@ -328,7 +328,7 @@ int main() {
 					// deltaV * 1 second (whereas 1 second denotes the 50 timepoints * 0.02seconds which are predicted into the future)
 					// deltaV is the difference in speed of the two vehicles.
 					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
-					bool check_car = (( check_car_s > car_s - deltaS - 30) && ((check_car_s - car_s) < 50));
+					bool check_car = ((check_car_s - car_s) < - 10 - deltaS) && ((check_car_s - car_s) < 50));
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
