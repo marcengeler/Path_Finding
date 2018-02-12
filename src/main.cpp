@@ -165,17 +165,10 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 }
 
 int convertDToLaneNumber (double d) {
-	if (d < 4.0 and d > 0) {return 1;}
+	if (d < 4.0 and d >= 0) {return 1;}
     if (d >= 4.0 and d < 8.0) {return 2;}
-    if (d > 8.0 and d < 12) {return 3;}
+    if (d >= 8.0 and d < 12) {return 3;}
     return -1;
-}
-
-double convertLaneNumberToD (int lane) {
-	if (lane == 1) {return 2.0;}
-    if (lane == 2) {return 6.0;}
-    if (lane == 3) {return 10.0;}
-    return 14.0;
 }
 
 int main() {
@@ -284,6 +277,7 @@ int main() {
 			bool too_close = false;
 			int change_lane = 0;
 			float d = 0.0;
+			int v_lane = 0;
 			double vx = 0.0;
 			double vy = 0.0;
 			double check_speed = 0.0;
@@ -308,6 +302,7 @@ int main() {
 			for (int i = 0; i < sensor_fusion.size(); i++) {
 				// car is in my lane
 				d = sensor_fusion[i][6];
+				v_lane = convertDToLaneNumber(d);
 				
 				vx = sensor_fusion[i][3];
 				vy = sensor_fusion[i][4];
@@ -317,10 +312,7 @@ int main() {
 				check_car_s += (double)prev_size * 0.02 * check_speed;
 					
 				// check if car is on the same lane as we are
-				if (convertDToLaneNumber(d) == lane) {
-					cout << convertDToLaneNumber(d) << endl;
-					cout << lane << endl;
-					cout << "#########" << endl;
+				if (v_lane == lane) {
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
 						// Flag to say we are too close
