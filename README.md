@@ -43,7 +43,7 @@ The same reference distance is taken into account before changing lanes.
 
 |--- reference distance ------ ||||| --------- reference distance + 30 m ---------------------|
 
-|------------------------------CAR ------------reference distance ---- FRONT CAT -------------|
+|------------------------------CAR ------------reference distance ---- FRONT CAR --------|
 
 |--- reference distance ------ ||||| --------- reference distance + 30 m ---------------------|
 
