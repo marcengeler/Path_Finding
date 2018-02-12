@@ -165,12 +165,17 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 }
 
 int convertDToLaneNumber (double d) {
-	cout << int(d/4.0) + 1 << endl;
-	return int(d/4.0) + 1;
+	if (d < 4.0 and d > 0) {return 1;}
+    if (d >= 4.0 and d < 8.0) {return 2;}
+    if (d > 8.0 and d < 12) {return 3;}
+    return -1;
 }
 
 double convertLaneNumberToD (int lane) {
-	return 2.0 + 4.0 * lane;
+	if (laneNumber == 1) {return 2.0;}
+    if (laneNumber == 2) {return 6.0;}
+    if (laneNumber == 3) {return 10.0;}
+    return 14.0;
 }
 
 int main() {
