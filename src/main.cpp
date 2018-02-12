@@ -324,12 +324,12 @@ int main() {
 					// This generates a bool which checks if cars in other lanes are within a certain range. To compute this range, 
 					// A space of +/- reference distance is permitted. Also, the front clearance needs to be 30 m larger, in order to
 					// only change to langes, which really are free of any traffic.
-					bool check_car = (((check_car_s - car_s) < - 20) && ((check_car_s - car_s) < 50));
+					bool check_car = (((check_car_s - car_s) > - 20) && ((check_car_s - car_s) < 50));
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
 							if (check_car) {
-								cout << "To the left" << endl;
+								cout << "To the right" << endl;
 								cout << "Check Car S - Car S" << endl;
 								cout << check_car_s - car_s << endl;
 							}
