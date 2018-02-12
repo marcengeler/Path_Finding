@@ -346,7 +346,7 @@ int main() {
 					if (lane == 1) {
 						if ( vlane == 0 ) {
 							// check if there is a car within +/- reference distance
-							car_to_left = car_to_left || check_car;
+							car_to_right = car_to_right || check_car;
 							if (check_car) {
 								cout << "To the left" << endl;
 								cout << "Check Car S - Car S" << endl;
@@ -354,7 +354,7 @@ int main() {
 							}
 						} else if ( vlane == 2 ) {
 							// check if there is a car within +/- reference distance
-							car_to_right = car_to_right || check_car;
+							car_to_left = car_to_left || check_car;
 							if (check_car) {
 								cout << "To the right" << endl;
 								cout << "Check Car S - Car S" << endl;
