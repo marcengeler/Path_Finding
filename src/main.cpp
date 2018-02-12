@@ -311,15 +311,13 @@ int main() {
 					
 				check_car_s += (double)prev_size * 0.02 * check_speed;
 				
-				if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
-					cout << v_lane << endl;
-					cout << lane << endl;
-					cout << "#######" << endl;
-				}
 				// check if car is on the same lane as we are
-				if (v_lane == lane) {
+				if ((d < (4 + 4 * lane)) && (d > (4 * lane))) {
 					// Check if i am close to car within 30m gap
-					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
+					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {	
+						cout << v_lane << endl;
+						cout << lane << endl;
+						cout << "#######" << endl;
 						// Flag to say we are too close
 						closeness = 1 - ((check_car_s - car_s) / ref_dist);
 						too_close = true;
