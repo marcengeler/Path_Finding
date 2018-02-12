@@ -165,6 +165,7 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s, const vec
 }
 
 int convertDToLaneNumber (double d) {
+	cout << int(d/4.0) + 1 << endl;
 	return int(d/4.0) + 1;
 }
 
