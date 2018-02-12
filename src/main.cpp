@@ -314,11 +314,14 @@ int main() {
 				
 				// Check the other lanes to swith to
 				if (too_close == true) {
-					bool check_car = (( check_car_s - car_s > - 20) && ((check_car_s - car_s) < ref_dist + 30));
+					bool check_car = (( check_car_s > car_s - 20) && ((check_car_s - car_s) < ref_dist + 30));
 					if (lane == 2) {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
+							if (check_car) {
+								cout << check_car_s - car_s << endl;
+							}
 						}
 						// set car_to_right to true, to not change outside of highway
 						car_to_right = true;
@@ -328,9 +331,15 @@ int main() {
 						if ( d > 0 && d < 4 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
+							if (check_car) {
+								cout << check_car_s - car_s << endl;
+							}
 						} else if ( d > 8 && d < 12 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
+							if (check_car) {
+								cout << check_car_s - car_s << endl;
+							}
 						}
 					}
 					
@@ -338,6 +347,9 @@ int main() {
 						if ( d > 4 && d < 8 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
+							if (check_car) {
+								cout << check_car_s - car_s << endl;
+							}
 						}
 						// set car_to_left to true, to not change outside of highway
 						car_to_left = true;
