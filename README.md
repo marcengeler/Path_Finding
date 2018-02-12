@@ -30,3 +30,23 @@ In order to change lanes, we need to be aware of vehiles to the left or right of
 Of course, in order to change lanes, we also need a clearance to the back, so the constaint is a bit tighter, before we can deceide to change lanes. As soon as we have a vehicle in front of us, and the adjacient lanes are clear, we can issue a lane changing command.
 
 Because we do a spline interpolation between our current position and our desired future point, the lane transision will be smooth.
+
+### Safety and Closeness
+
+While discussing the approach taken above, two words were mentioned. Safety and Closeness to other vehicles. In oder to get a clearer view how those two metrics were implemented, this section will discuss this topic.
+
+First of all, a safe distance is considered to be a distance of 2 seconds in time. To translate this distance it suffices to take the velocity [m/s] * 2 [sec]. This is the minimal safety distance, or reference distance the car should have to the front vehicle. In order to decelerate accordingly, any vehicle in the same lane within this reference distance is considered to be close, and the car will start decelerating.
+
+The closeness parameter is defined as a linear parameter which is 0, when the vehicle is reference_distance away from the car and 1, if the car collides with the front vehicle. Using this parameter, the deceleration taken into action, when driving upon a front vehicle is proportional to this closeness parameter. This ensures a smooth deceleration curve, rather than maximum deceleration everytime a vehicle is found in front of us.
+
+The same reference distance is taken into account before changing lanes.
+
+|--- reference distance ------ ||||| --------- reference distance + 30 m ---------------------|
+|------------------------------CAR ------------reference distance ---- FRONT CAT -------------|
+|--- reference distance ------ ||||| --------- reference distance + 30 m ---------------------|
+
+in order to pass in either lane left or right, there needs to be a space equal to this reference distance. The front facing clearance needs to be 30m larger to avoid frequent lane changes in "traffic jams". This could be changed with checking the vehicle speed, however, the simulation doesn't seem to follow any logic speed distribution, and overtaking on the right hand side seems to be allowed, so this was not integrated.
+
+### Lane Shifting
+
+If both lanes are considered save, the left hand lane is preferred. For the most left lane and the most right lane, a car to the left, or to the right is always detected. This avoids a lane shift in prohibited space. As soon as a lane shift is engaged, the lane number is changed in the algorithm, which will switch the desired position to the desired lane, and the splines will interpolate accordingly. However, a new car may be detected during the lane shift, due to this fact, a new state was introduced. This lane shifting state will stay true until the car is within 0.5m of the center of the road. During this lane shifting state no further lane shift will be possible.
