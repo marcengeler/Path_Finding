@@ -328,16 +328,17 @@ int main() {
 					// deltaV * 1 second (whereas 1 second denotes the 50 timepoints * 0.02seconds which are predicted into the future)
 					// deltaV is the difference in speed of the two vehicles.
 					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
-					if (deltaS < 0) {
-						cout << "delta S calc error" << endl;
-					}
-					bool check_car = (( check_car_s > car_s - deltaS - 60) && ((check_car_s - car_s) < 50));
-					if (check_car) {
-						cout << check_car_s - car_s << endl;
-					}
+					bool check_car = (( check_car_s > car_s - deltaS - 30) && ((check_car_s - car_s) < 50));
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
+							if (check_car) {
+								cout << "To the left" << endl;
+								cout << "Car S" << endl;
+								cout << car_s << endl;
+								cout << "Check Car S" << endl;
+								cout << check_car_s << endl;
+							}
 							car_to_left = car_to_left || check_car;
 						}
 						// set car_to_right to true, to not change outside of highway
@@ -348,9 +349,23 @@ int main() {
 						if ( vlane == 0 ) {
 							// check if there is a car within +/- reference distance
 							car_to_left = car_to_left || check_car;
+							if (check_car) {
+								cout << "To the left" << endl;
+								cout << "Car S" << endl;
+								cout << car_s << endl;
+								cout << "Check Car S" << endl;
+								cout << check_car_s << endl;
+							}
 						} else if ( vlane == 2 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
+							if (check_car) {
+								cout << "To the right" << endl;
+								cout << "Car S" << endl;
+								cout << car_s << endl;
+								cout << "Check Car S" << endl;
+								cout << check_car_s << endl;
+							}
 						}
 					}
 					
@@ -358,6 +373,13 @@ int main() {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
 							car_to_right = car_to_right || check_car;
+							if (check_car) {
+								cout << "To the right" << endl;
+								cout << "Car S" << endl;
+								cout << car_s << endl;
+								cout << "Check Car S" << endl;
+								cout << check_car_s << endl;
+							}
 						}
 						// set car_to_left to true, to not change outside of highway
 						car_to_left = true;
