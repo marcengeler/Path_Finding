@@ -318,6 +318,9 @@ int main() {
 					
 				// check if car is on the same lane as we are
 				if (convertDToLaneNumber(d) == lane) {
+					cout << convertDToLaneNumber(d) << endl;
+					cout << lane << endl;
+					cout << "#########" << endl;
 					// Check if i am close to car within 30m gap
 					if (( check_car_s >  car_s) && ((check_car_s - car_s) < ref_dist)) {
 						// Flag to say we are too close
