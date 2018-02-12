@@ -42,7 +42,9 @@ The closeness parameter is defined as a linear parameter which is 0, when the ve
 The same reference distance is taken into account before changing lanes.
 
 |--- reference distance ------ ||||| --------- reference distance + 30 m ---------------------|
+
 |------------------------------CAR ------------reference distance ---- FRONT CAT -------------|
+
 |--- reference distance ------ ||||| --------- reference distance + 30 m ---------------------|
 
 in order to pass in either lane left or right, there needs to be a space equal to this reference distance. The front facing clearance needs to be 30m larger to avoid frequent lane changes in "traffic jams". This could be changed with checking the vehicle speed, however, the simulation doesn't seem to follow any logic speed distribution, and overtaking on the right hand side seems to be allowed, so this was not integrated.
