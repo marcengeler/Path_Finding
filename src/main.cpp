@@ -324,11 +324,7 @@ int main() {
 					// This generates a bool which checks if cars in other lanes are within a certain range. To compute this range, 
 					// A space of +/- reference distance is permitted. Also, the front clearance needs to be 30 m larger, in order to
 					// only change to langes, which really are free of any traffic.
-					// Also, in order to account for the actual car speed, an additional safeguard distance is introduced. It is
-					// deltaV * 1 second (whereas 1 second denotes the 50 timepoints * 0.02seconds which are predicted into the future)
-					// deltaV is the difference in speed of the two vehicles.
-					double deltaS = ((check_speed - car_speed) > 0) * (check_speed - car_speed);
-					bool check_car = (((check_car_s - car_s) < - 10 - deltaS) && ((check_car_s - car_s) < 50));
+					bool check_car = (((check_car_s - car_s) < - 20) && ((check_car_s - car_s) < 50));
 					if (lane == 2) {
 						if ( vlane == 1 ) {
 							// check if there is a car within +/- reference distance
